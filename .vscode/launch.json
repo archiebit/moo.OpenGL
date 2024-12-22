@@ -15,7 +15,7 @@
 
             "setupCommands":
             [
-                { "text": "-enable-pretty-formatting"         },
+                { "text": "-enable-pretty-printing"           },
                 { "text": "-gdb-set disassembly-flavor intel" }
             ]
         }
