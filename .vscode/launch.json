@@ -8,7 +8,11 @@
             "request": "launch",
             "cwd":     "${workspaceFolder}\\out\\${command:cpptools.activeConfigName}\\out\\bin",
             "program": "${workspaceFolder}\\out\\${command:cpptools.activeConfigName}\\out\\bin\\${input:program}",
-            "args": [],
+            "args":
+            [
+                "--xml=..\\..\\..\\..\\.vscode\\gl.xml",
+                "--ver='4.6 core'"
+            ],
 
             "miDebuggerPath": "gdb.exe",
             "miDebuggerArgs": "",
