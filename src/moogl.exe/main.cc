@@ -1,10 +1,13 @@
-
+#include <moo/input.hh>
 
 
 int main( int argc, char * argv[] )
 {
-    static_cast<void>( argc );
-    static_cast<void>( argv );
+    using namespace moo;
+
+
+    parse_input( argc, argv );
+    treat_input( );
 
     return 0;
 }
