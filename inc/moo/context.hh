@@ -1,6 +1,8 @@
 #ifndef MOO_CONTEXT_HH
 #define MOO_CONTEXT_HH
 
+#include <pugi/xml.hh>
+
 
 namespace moo
 {
@@ -8,6 +10,9 @@ namespace moo
     {
     public:
         static void init( );
+
+    private:
+        static bool resolve_list( pugi::xml_node list );
     };
 }
 
