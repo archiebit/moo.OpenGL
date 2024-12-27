@@ -12,7 +12,7 @@ namespace moo
     std::string version;
 
     static pugi::xml_document file;
-    static pugi::xml_node     root;
+    pugi::xml_node            root;
 
     static std::string const usage
     {
@@ -41,12 +41,6 @@ namespace moo
 
     void parse_input( int argc, char * argv[] )
     {
-        static std::string const usage
-        {
-            
-        };
-
-
         bool versioned = false;
         bool   inputed = false;
         bool  outputed = false;
