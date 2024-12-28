@@ -1,4 +1,5 @@
 #include <moo/input.hh>
+#include <moo/context.hh>
 
 
 int main( int argc, char * argv[] )
@@ -8,6 +9,8 @@ int main( int argc, char * argv[] )
 
     parse_input( argc, argv );
     treat_input( );
+
+    context::init( );
 
     return 0;
 }
