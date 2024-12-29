@@ -153,6 +153,11 @@ namespace moo
             {
                 throw "ERROR: Input XML file was not provided.\n";
             }
+
+            if( not outputed )
+            {
+                output = ".";
+            }
         }
         catch( char const * message )
         {
