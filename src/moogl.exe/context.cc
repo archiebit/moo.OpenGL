@@ -3,6 +3,9 @@
 #include <moo/constant.hh>
 #include <moo/function.hh>
 
+#include <iostream>
+#include <fstream>
+
 
 namespace moo
 {
@@ -75,5 +78,92 @@ namespace moo
 
 
         return std::strcmp( source, target ) == 0;
+    }
+}
+
+
+namespace moo
+{
+    void context::save( )
+    {
+        save_general_header( );
+        save_special_header( );
+        save_special_source( );
+    }
+
+
+    void context::save_general_header( )
+    {
+        std::fstream file;
+        std::string  path = output + "/GL.hh";
+        std::string  data
+        {
+
+        };
+
+
+        try
+        {
+            file.exceptions( ~std::ios::goodbit );
+            file.open( path, std::ios::out | std::ios::trunc );
+
+            file.write( data.data( ), data.size( ) );
+            file.close( );
+        }
+        catch( std::exception & )
+        {
+            std::cerr << "ERROR: Can\'t write to the output file.\n";
+            std::exit( 1 );
+        }
+    }
+
+    void context::save_special_header( )
+    {
+        std::fstream file;
+        std::string  path = output + "/GL-defined.hh";
+        std::string  data
+        {
+
+        };
+
+
+        try
+        {
+            file.exceptions( ~std::ios::goodbit );
+            file.open( path, std::ios::out | std::ios::trunc );
+
+            file.write( data.data( ), data.size( ) );
+            file.close( );
+        }
+        catch( std::exception & )
+        {
+            std::cerr << "ERROR: Can\'t write to the output file.\n";
+            std::exit( 1 );
+        }
+    }
+
+    void context::save_special_source( )
+    {
+        std::fstream file;
+        std::string  path = output + "/GL-defined.cc";
+        std::string  data
+        {
+
+        };
+
+
+        try
+        {
+            file.exceptions( ~std::ios::goodbit );
+            file.open( path, std::ios::out | std::ios::trunc );
+
+            file.write( data.data( ), data.size( ) );
+            file.close( );
+        }
+        catch( std::exception & )
+        {
+            std::cerr << "ERROR: Can\'t write to the output file.\n";
+            std::exit( 1 );
+        }
     }
 }

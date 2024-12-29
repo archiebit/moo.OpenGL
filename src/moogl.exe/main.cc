@@ -11,6 +11,7 @@ int main( int argc, char * argv[] )
     treat_input( );
 
     context::init( );
+    context::save( );
 
     return 0;
 }
