@@ -241,6 +241,30 @@ namespace moo
     {
         for( ; ; )
         {
+            if( std::size_t spot = target.find( "/* MAJOR */" ); spot != std::string::npos )
+            {
+                change( target, "/* MAJOR */", major );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* MINOR */" ); spot != std::string::npos )
+            {
+                change( target, "/* MINOR */", minor );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* GROUP */" ); spot != std::string::npos )
+            {
+                change( target, "/* GROUP */", group );
+
+                continue;
+            }
+
+
             break;
         }
     }
