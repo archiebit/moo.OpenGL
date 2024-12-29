@@ -144,6 +144,8 @@ namespace moo
             "    enum class GLsync  : unsigned long long int { };\n"
             "    enum class GLfixed : signed int             { };\n"
             "    enum class GLhalf  : signed short int       { };\n"
+            "\n"
+            "    using GLDEBUGPROC = GLvoid( GLAPI * )( GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const GLvoid * userParam );\n"
             "#else\n"
             "#   error Target OS is unsupported!\n"
             "#endif\n"
