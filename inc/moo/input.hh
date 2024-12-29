@@ -10,7 +10,10 @@ namespace moo
 {
     extern std::string   input; // XML file path.
     extern std::string  output; // Output directory.
-    extern std::string version; // Target version.
+    extern std::string   major;
+    extern std::string   minor;
+    extern std::string   group;
+
     extern pugi::xml_node root;
 
     void parse_input( int argc, char * argv[] );

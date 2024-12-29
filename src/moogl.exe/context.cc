@@ -11,10 +11,8 @@ namespace moo
         std::string search = "//feature[@api=\'gl\'][@number=\'<MAJ>.<MIN>\'][1]";
         std::string source;
 
-        int major, maj = 1;
-        int minor, min = 0;
-
-        std::sscanf( version.c_str( ), "%i.%i", & major, & minor );
+        int major = std::strtol( moo::major.c_str( ), nullptr, 10 ), maj = 1;
+        int minor = std::strtol( moo::minor.c_str( ), nullptr, 10 ), min = 0;
 
 
         while( maj <= major and min <= minor )
@@ -72,14 +70,8 @@ namespace moo
         char const * target = nullptr;
 
         // Profile presented.
-        if( version.find( "compatible" ) != std::string::npos )
-        {
-            target = "compatibility";
-        }
-        if( version.find( "core" ) != std::string::npos )
-        {
-            target = "core";
-        }
+        if( group == "COMPATIBLE" ) target = "compatibility";
+        if( group == "CORE"       ) target = "core";
 
 
         return std::strcmp( source, target ) == 0;

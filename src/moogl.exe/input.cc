@@ -7,9 +7,11 @@
 
 namespace moo
 {
-    std::string   input;
-    std::string  output;
-    std::string version;
+    std::string  input;
+    std::string output;
+    std::string  major;
+    std::string  minor;
+    std::string  group;
 
     static pugi::xml_document file;
     pugi::xml_node            root;
@@ -92,12 +94,15 @@ namespace moo
                         continue;
                     }
 
+                    major = "1";
+                    minor = "0";
+                    group = "NONE";
 
-                    char group[ 11 ] = { };
-                    int  major;
-                    int  minor;
+                    char space[ 11 ];
+                    int    maj;
+                    int    min;
                     int   size;
-                    int  count = std::sscanf( argv[ i ], "--ver=\'%i.%i%n", & major, & minor, & size );
+                    int  count = std::sscanf( argv[ i ], "--ver=\'%i.%i%n", & maj, & min, & size );
 
 
                     if( count != 2 )
@@ -105,29 +110,32 @@ namespace moo
                         throw "ERROR: Invalid version format.\n";
                     }
 
-                    version += std::to_string( major );
-                    version += ".";
-                    version += std::to_string( minor );
+                    major = std::to_string( maj );
+                    minor = std::to_string( min );
 
 
-                    count = std::sscanf( argv[ i ] + size + 1, "%10s\'", group );
+                    count = std::sscanf( argv[ i ] + size + 1, "%10s\'", space );
 
-                    if( major >= 3 )
+                    if( maj >= 3 )
                     {
                         if( count == 0 )
                         {
                             throw "ERROR: Invalid version format.\n";
                         }
 
-                        if( std::strncmp( group, "core", 4 ) == 0 )
+                        if( std::strncmp( space, "core",        4 ) == 0 )
                         {
-                            version += " core";
+                            group = "CORE";
                         }
-                        else if( std::strncmp( group, "compatible", 10 ) == 0 )
+                        if( std::strncmp( space, "compatible", 10 ) == 0 )
                         {
-                            version += " compatible";
+                            group = "COMPATIBLE";
                         }
-                        else throw "ERROR: Profile must be presented.\n";
+
+                        if( group == "NONE" )
+                        {
+                            throw "ERROR: Profile must be presented.\n";
+                        }
                     }
 
 
