@@ -239,23 +239,10 @@ namespace moo
 {
     void context::define( std::string & target )
     {
-        std::map<std::string, std::size_t> match
+        for( ; ; )
         {
-
-        };
-
-
-        std::size_t count = match.size( );
-        std::size_t ready = 0;
-
-        do
-        {
-            for( auto & [ name, spot ] : match )
-            {
-                ready += ( spot = target.find( name ) ) == std::string::npos;
-            }
+            break;
         }
-        while( ready != count );
     }
 
     void context::change( std::string & target, std::string const & sample, std::string const & source )
