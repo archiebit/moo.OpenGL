@@ -233,3 +233,69 @@ namespace moo
         }
     }
 }
+
+
+namespace moo
+{
+    void context::define( std::string & target )
+    {
+        std::map<std::string, std::size_t> match
+        {
+
+        };
+
+
+        std::size_t count = match.size( );
+        std::size_t ready = 0;
+
+        do
+        {
+            for( auto & [ name, spot ] : match )
+            {
+                ready += ( spot = target.find( name ) ) == std::string::npos;
+            }
+        }
+        while( ready != count );
+    }
+
+    void context::change( std::string & target, std::string const & sample, std::string const & source )
+    {
+        if( source.empty( ) )
+        {
+            return;
+        }
+
+
+        std::size_t offset = target.find( sample );
+        std::size_t starts;
+        std::size_t ending;
+        std::size_t spaces;
+
+        if( offset != std::string::npos )
+        {
+            starts = 0;
+            ending = source.find( '\n' );
+            spaces = offset - target.rfind( '\n', offset ) - 1;
+        }
+        else return;
+
+        target.erase( offset, sample.size( ) );
+
+
+        while( ending != std::string::npos )
+        {
+            if( starts != 0 )
+            {
+                target.insert( offset, spaces, ' ' ), offset += spaces;
+            }
+
+            target.insert( offset, source, starts, ending - starts + 1 );
+
+            offset = offset + ending - starts + 1;
+            starts = ending + 1;
+            ending = source.find( '\n', starts );
+        }
+
+        target.insert( offset, source, starts );
+    }
+}

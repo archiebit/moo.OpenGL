@@ -12,6 +12,9 @@ namespace moo
         static void init( );
         static void save( );
 
+        static void define( std::string & target );
+        static void change( std::string & target, std::string const & sample, std::string const & source );
+
     private:
         static bool resolve_list( pugi::xml_node list );
 
