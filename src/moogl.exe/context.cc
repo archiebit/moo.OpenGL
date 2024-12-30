@@ -189,8 +189,41 @@ namespace moo
         std::string  path = output + "/GL-defined.hh";
         std::string  data
         {
-
+            "#ifndef MOO_OPENGL_/* MAJOR */_/* MINOR */_/* GROUP */_HH\n"
+            "#define MOO_OPENGL_/* MAJOR */_/* MINOR */_/* GROUP */_HH\n"
+            "\n"
+            "#include \"GL.hh\"\n"
+            "\n"
+            "\n"
+            "namespace moo::GL\n"
+            "{\n"
+            "    template <>\n"
+            "    class context</* MAJOR */, /* MINOR */, /* GROUP */>\n"
+            "    {\n"
+            "    private:\n"
+            "       ~context( ) = delete;\n"
+            "        context( ) = delete;\n"
+            "        context( context const &  ) = delete;\n"
+            "        context( context const && ) = delete;\n"
+            "        context( context &        ) = delete;\n"
+            "        context( context &&       ) = delete;\n"
+            "\n"
+            "        context & operator=( context const &  ) = delete;\n"
+            "        context & operator=( context const && ) = delete;\n"
+            "        context & operator=( context &        ) = delete;\n"
+            "        context & operator=( context &&       ) = delete;\n"
+            "\n"
+            "\n"
+            "    public:\n"
+            "        /* PROCS */"
+            "    };\n"
+            "}\n"
+            "\n"
+            "\n"
+            "#endif"
         };
+
+        define( data );
 
 
         try
@@ -260,6 +293,14 @@ namespace moo
             if( std::size_t spot = target.find( "/* GROUP */" ); spot != std::string::npos )
             {
                 change( target, "/* GROUP */", group );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* PROCS */" ); spot != std::string::npos )
+            {
+                change( target, "/* PROCS */", function::declare( ) );
 
                 continue;
             }
