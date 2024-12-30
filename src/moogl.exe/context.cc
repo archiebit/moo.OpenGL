@@ -263,6 +263,12 @@ namespace moo
             "    public:\n"
             "        /* POINT */"
             "    };\n"
+            "\n"
+            "\n"
+            "    static void context_load( context</* MAJOR */, /* MINOR */, /* GROUP */> * store, void *( * load )( char const * ) )\n"
+            "    {\n"
+            "        /* STORE */"
+            "    }\n"
             "}"
         };
 
@@ -327,6 +333,14 @@ namespace moo
             if( std::size_t spot = target.find( "/* POINT */" ); spot != std::string::npos )
             {
                 change( target, "/* POINT */", function::points( ) );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* STORE */" ); spot != std::string::npos )
+            {
+                change( target, "/* STORE */", function::stores( ) );
 
                 continue;
             }

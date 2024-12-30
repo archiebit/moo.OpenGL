@@ -361,4 +361,45 @@ namespace moo
 
         return list;
     }
+
+    std::string function::stores( )
+    {
+        std::size_t type = 0;
+        std::size_t name = 0;
+
+        for( auto & [ label, value ] : functions )
+        {
+            type = std::max( type, value.function_type.size( ) );
+            name = std::max( name, value.function_name.size( ) );
+        }
+
+
+        std::string list;
+        std::string item;
+
+        for( auto & [ label, value ] : functions )
+        {
+            std::size_t type_step = type - value.function_type.size( );
+            std::size_t name_step = name - value.function_name.size( );
+
+
+            item.clear( );
+
+            item.append( "store->" );
+            item.append( value.function_name.c_str( ) + 2 );
+            item.append( name_step, ' ' );
+            item.append( " = reinterpret_cast<decltype( store->" );
+            item.append( value.function_name.c_str( ) + 2 );
+            item.append( name_step, ' ' );
+            item.append( ")>( ( * load )( \"" );
+            item.append( value.function_name.c_str( ) );
+            item.append( "\"" );
+            item.append( name_step, ' ' );
+            item.append( " ) );\n" );
+
+            list.append( item );
+        }
+
+        return list;
+    }
 }
