@@ -247,8 +247,26 @@ namespace moo
         std::string  path = output + "/GL-defined.cc";
         std::string  data
         {
-
+            "#include \"GL.hh\"\n"
+            "#include \"GL-defined.hh\"\n"
+            "\n"
+            "\n"
+            "namespace moo::GL::imp\n"
+            "{\n"
+            "    template <int major, int minor, profile group>\n"
+            "    class context;\n"
+            "\n"
+            "\n"
+            "    template <>\n"
+            "    class context</* MAJOR */, /* MINOR */, /* GROUP */>\n"
+            "    {\n"
+            "    public:\n"
+            "        /* POINT */"
+            "    };\n"
+            "}"
         };
+
+        define( data );
 
 
         try
@@ -301,6 +319,14 @@ namespace moo
             if( std::size_t spot = target.find( "/* PROCS */" ); spot != std::string::npos )
             {
                 change( target, "/* PROCS */", function::declare( ) );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* POINT */" ); spot != std::string::npos )
+            {
+                change( target, "/* POINT */", function::points( ) );
 
                 continue;
             }

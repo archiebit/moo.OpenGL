@@ -27,6 +27,7 @@ namespace moo
 
 
         static std::string declare( );
+        static std::string  points( );
 
     private:
         static void make_nice_type( std::string & value );
