@@ -402,4 +402,64 @@ namespace moo
 
         return list;
     }
+
+    std::string function::implement( )
+    {
+        std::size_t type = 0;
+        std::size_t name = 0;
+
+        for( auto & [ label, value ] : functions )
+        {
+            type = std::max( type, value.function_type.size( ) );
+            name = std::max( name, value.function_name.size( ) );
+        }
+
+
+        std::string list;
+        std::string item;
+
+        for( auto & [ label, value ] : functions )
+        {
+            std::size_t type_step = type - value.function_type.size( );
+            std::size_t name_step = name - value.function_name.size( );
+
+
+            item.clear( );
+
+            item.append( value.function_type.c_str( ) );
+            item.append( type_step, ' ' );
+            item.append( 1, ' ' );
+            item.append( name_step, ' ' );
+            item.append( "context</* MAJOR */, /* MINOR */, /* GROUP */>::" );
+            item.append( value.function_name.c_str( ) + 2 );
+
+            item.append( "(" );
+
+            for( std::size_t i = 0; i < value.argument_type.size( ); ++i )
+            {
+                item.append( 1, ' ' ).append( value.argument_type[ i ] );
+                item.append( 1, ' ' ).append( value.argument_name[ i ] );
+
+                if( i != value.argument_type.size( ) - 1 ) item.append( "," );
+            }
+
+            item.append( " )\n{\n    " );
+            item.append( "return reinterpret_cast<imp::context</* MAJOR */, /* MINOR */, /* GROUP */> *>( this )->" );
+            item.append( value.function_name.c_str( ) + 2 );
+
+            item.append( "(" );
+
+            for( std::size_t i = 0; i < value.argument_name.size( ); ++i )
+            {
+                item.append( 1, ' ' ).append( value.argument_name[ i ] );
+
+                if( i != value.argument_name.size( ) - 1 ) item.append( "," );
+            }
+
+            item.append( " );\n}\n");
+            list.append( item );
+        }
+
+        return list;
+    }
 }

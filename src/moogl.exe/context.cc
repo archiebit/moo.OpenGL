@@ -269,6 +269,12 @@ namespace moo
             "    {\n"
             "        /* STORE */"
             "    }\n"
+            "}\n"
+            "\n"
+            "\n"
+            "namespace moo::GL\n"
+            "{\n"
+            "    /* IMPLS */"
             "}"
         };
 
@@ -341,6 +347,14 @@ namespace moo
             if( std::size_t spot = target.find( "/* STORE */" ); spot != std::string::npos )
             {
                 change( target, "/* STORE */", function::stores( ) );
+
+                continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* IMPLS */" ); spot != std::string::npos )
+            {
+                change( target, "/* IMPLS */", function::implement( ) );
 
                 continue;
             }

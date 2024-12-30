@@ -26,9 +26,10 @@ namespace moo
         static void remove_node( pugi::xml_node node );
 
 
-        static std::string declare( );
-        static std::string  points( );
-        static std::string  stores( );
+        static std::string   declare( );
+        static std::string    points( );
+        static std::string    stores( );
+        static std::string implement( );
 
     private:
         static void make_nice_type( std::string & value );
