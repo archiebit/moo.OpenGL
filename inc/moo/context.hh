@@ -21,6 +21,7 @@ namespace moo
         static void save_general_header( );
         static void save_special_header( );
         static void save_special_source( );
+        static void save_loading_source( );
     };
 }
 

@@ -385,13 +385,12 @@ namespace moo
 
             item.clear( );
 
-            item.append( "store->" );
             item.append( value.function_name.c_str( ) + 2 );
             item.append( name_step, ' ' );
-            item.append( " = reinterpret_cast<decltype( store->" );
+            item.append( " = reinterpret_cast<decltype( " );
             item.append( value.function_name.c_str( ) + 2 );
             item.append( name_step, ' ' );
-            item.append( ")>( ( * load )( \"" );
+            item.append( ")>( mooglFindCommand( \"" );
             item.append( value.function_name.c_str( ) );
             item.append( "\"" );
             item.append( name_step, ' ' );
