@@ -192,7 +192,7 @@ namespace moo
     void context::save_special_header( )
     {
         std::fstream file;
-        std::string  path = output + "/GL-defined.hh";
+        std::string  path = output + "/GL-/* MAJOR */-/* MINOR */-/* GROUP */.hh";
         std::string  data
         {
             "#ifndef MOO_OPENGL_/* MAJOR */_/* MINOR */_/* GROUP */_HH\n"
@@ -230,6 +230,7 @@ namespace moo
         };
 
         define( data );
+        define( path );
 
 
         try
@@ -250,11 +251,11 @@ namespace moo
     void context::save_special_source( )
     {
         std::fstream file;
-        std::string  path = output + "/GL-defined.cc";
+        std::string  path = output + "/GL-/* MAJOR */-/* MINOR */-/* GROUP */.cc";
         std::string  data
         {
             "#include \"GL.hh\"\n"
-            "#include \"GL-defined.hh\"\n"
+            "#include \"GL-/* MAJOR */-/* MINOR */-/* GROUP */.hh\"\n"
             "\n"
             "#ifdef _WIN32\n"
             "#   include <windows.h>\n"
@@ -309,6 +310,7 @@ namespace moo
         };
 
         define( data );
+        define( path );
 
 
         try
