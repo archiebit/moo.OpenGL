@@ -761,12 +761,6 @@ namespace moo
 
     void context::change( std::string & target, std::string const & sample, std::string const & source )
     {
-        if( source.empty( ) )
-        {
-            return;
-        }
-
-
         std::size_t offset = target.find( sample );
         std::size_t starts;
         std::size_t ending;
@@ -781,6 +775,11 @@ namespace moo
         else return;
 
         target.erase( offset, sample.size( ) );
+
+        if( source.empty( ) )
+        {
+            return;
+        }
 
 
         while( ending != std::string::npos )
