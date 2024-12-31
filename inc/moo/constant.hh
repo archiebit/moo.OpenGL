@@ -22,6 +22,10 @@ namespace moo
 
         static void remove_list( pugi::xml_node list );
         static void remove_node( pugi::xml_node node );
+
+
+        static std::string declare_32( );
+        static std::string declare_64( );
     };
 
 

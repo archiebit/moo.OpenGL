@@ -221,6 +221,11 @@ namespace moo
             "\n"
             "\n"
             "    public:\n"
+            "        /* ENUMS32 */"
+            "\n"
+            "        /* ENUMS64 */"
+            "\n"
+            "\n"
             "        /* PROCS */"
             "    };\n"
             "}\n"
@@ -735,6 +740,18 @@ namespace moo
                 change( target, "/* IMPLS */", function::implement( ) );
 
                 continue;
+            }
+
+
+            if( std::size_t spot = target.find( "/* ENUMS32 */" ); spot != std::string::npos )
+            {
+                change( target, "/* ENUMS32 */", constant::declare_32( ) );
+            }
+
+
+            if( std::size_t spot = target.find( "/* ENUMS64 */" ); spot != std::string::npos )
+            {
+                change( target, "/* ENUMS64 */", constant::declare_64( ) );
             }
 
 
